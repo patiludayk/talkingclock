@@ -1,8 +1,10 @@
 package com.talking.clock.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -11,20 +13,15 @@ public class TimeConversionService {
 
     private final String timeRegex = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$";
 
-    public String humanFriendlyTime(Optional<String> time) {
-        String timeInWords = null;
+    @Autowired
+    private ScriptRunner scriptRunner;
 
-        if (time.isPresent() && !time.get().isEmpty()) {
-            if(!time.get().matches(timeRegex)) {
-                log.error("invalid time format or character found. {}", time.get());
-                throw new IllegalArgumentException("invalid time format or character found");
-            }
-            //return time by converting
+    public List<String> humanFriendlyTime(Optional<String> time) {
 
-        } else {
-            //return current time
-
+        if (time.isPresent() && !time.get().matches(timeRegex)) {
+            log.error("invalid time format or character found. {}", time.get());
+            throw new IllegalArgumentException("invalid time format or character found");
         }
-        return timeInWords;
+        return scriptRunner.getTime(time);
     }
 }
