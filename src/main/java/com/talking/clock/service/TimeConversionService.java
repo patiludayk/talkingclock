@@ -31,6 +31,7 @@ public class TimeConversionService {
             log.error("invalid time format or character found. {}", time.get());
             throw new IllegalArgumentException("invalid time format or character found");
         }
-        return scriptRunner.getTime(time).get(0);
+        final String timeInWord = scriptRunner.getTime(time).get(0);
+        return timeInWord.substring(0, 1).toUpperCase() + timeInWord.substring(1).toLowerCase();
     }
 }

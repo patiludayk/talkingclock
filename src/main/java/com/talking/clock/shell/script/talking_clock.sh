@@ -19,7 +19,7 @@ talking_time(){
 		then
 			talking_minute=
 			talk=
-			fixed="O'clock"
+			fixed="o'clock"
 	fi
 
 	if((talking_hour==0 || talking_hour==12 || talking_hour == 24)); then
