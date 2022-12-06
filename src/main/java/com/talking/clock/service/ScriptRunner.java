@@ -28,6 +28,11 @@ public class ScriptRunner {
         this.isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
     }
 
+    /**
+     * return time in words
+     * @param time
+     * @return list of String
+     */
     public List<String> getTime(Optional<String> time) {
         if(time.isPresent()){
             return this.getTime("sh", "talking_clock.sh", time.get());

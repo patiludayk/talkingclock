@@ -20,12 +20,17 @@ public class TimeConversionService {
         this.scriptRunner = scriptRunner;
     }
 
-    public List<String> humanFriendlyTime(Optional<String> time) {
+    /**
+     * returns given time in words if present or else current time in words
+     * @param time
+     * @return string time in word
+     */
+    public String readTime(Optional<String> time) {
 
         if (time.isPresent() && !time.get().matches(timeRegex)) {
             log.error("invalid time format or character found. {}", time.get());
             throw new IllegalArgumentException("invalid time format or character found");
         }
-        return scriptRunner.getTime(time);
+        return scriptRunner.getTime(time).get(0);
     }
 }

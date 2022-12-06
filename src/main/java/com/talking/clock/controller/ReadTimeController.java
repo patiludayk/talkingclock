@@ -24,7 +24,7 @@ public class ReadTimeController {
     @GetMapping(value = {"timeinwords", "timeinwords/{time}"})
     public ResponseEntity<HumanFriendlyTime> getTime(@PathVariable("time") Optional<String> time) {
         try {
-            return new ResponseEntity<>(HumanFriendlyTime.builder().value(timeConversionService.humanFriendlyTime(time).get(0)).build(), HttpStatus.OK);
+            return new ResponseEntity<>(HumanFriendlyTime.builder().value(timeConversionService.readTime(time)).build(), HttpStatus.OK);
         } catch (IllegalArgumentException illegalArgumentException) {
             return new ResponseEntity<>(HumanFriendlyTime.builder().error("invalid input.").build(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
