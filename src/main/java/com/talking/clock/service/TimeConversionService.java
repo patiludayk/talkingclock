@@ -13,8 +13,12 @@ public class TimeConversionService {
 
     private final String timeRegex = "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$";
 
-    @Autowired
     private ScriptRunner scriptRunner;
+
+    @Autowired
+    public TimeConversionService(ScriptRunner scriptRunner) {
+        this.scriptRunner = scriptRunner;
+    }
 
     public List<String> humanFriendlyTime(Optional<String> time) {
 

@@ -14,8 +14,12 @@ import java.util.Optional;
 @RestController
 public class ReadTimeController {
 
+    private TimeConversionService timeConversionService;
+
     @Autowired
-    TimeConversionService timeConversionService;
+    public ReadTimeController(TimeConversionService timeConversionService) {
+        this.timeConversionService = timeConversionService;
+    }
 
     @GetMapping(value = {"timeinwords", "timeinwords/{time}"})
     public ResponseEntity<HumanFriendlyTime> getTime(@PathVariable("time") Optional<String> time) {
@@ -23,7 +27,7 @@ public class ReadTimeController {
             return new ResponseEntity<>(HumanFriendlyTime.builder().value(timeConversionService.humanFriendlyTime(time).get(0)).build(), HttpStatus.OK);
         } catch (IllegalArgumentException illegalArgumentException) {
             return new ResponseEntity<>(HumanFriendlyTime.builder().error("invalid input.").build(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HumanFriendlyTime.builder().error(e.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

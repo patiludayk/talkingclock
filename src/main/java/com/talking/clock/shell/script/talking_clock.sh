@@ -39,7 +39,6 @@ talking_time(){
 	declare hour_to_word=$(digit2words $talking_hour)
 	#echo $hour_to_word
 
-
 	echo $min_to_word $talk $hour_to_word $fixed
 }
 

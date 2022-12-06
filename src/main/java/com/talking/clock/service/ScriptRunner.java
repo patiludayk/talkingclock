@@ -44,7 +44,8 @@ public class ScriptRunner {
         } else {
             builder.command(command);
         }
-        builder.directory(new File("/Users/udaypatil/IdeaProjects/talking.clock/src/main/java/com/talking/clock/shell/script"));
+        File directory = new File(builder.environment().get("PWD")+ "/src/main/java/com/talking/clock/shell/script");
+        builder.directory(directory);
         try {
             Process process = builder.start();
             output = new ArrayList<>();
@@ -57,20 +58,16 @@ public class ScriptRunner {
             return output;
         } catch (IOException e) {
             log.error("error starting new process.{}", e.getMessage());
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e.getMessage());
         } catch (ExecutionException e) {
             log.error("error executing task.{}", e.getMessage());
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e.getMessage());
         } catch (InterruptedException e) {
             log.error("execution interrupted.{}", e.getMessage());
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e.getMessage());
         } catch (TimeoutException e) {
             log.error("timeout waiting for command output.{}", e.getMessage());
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e.getMessage());
         }
     }
 }
