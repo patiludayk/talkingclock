@@ -1,5 +1,6 @@
 package com.talking.clock.shell;
 
+import com.talking.clock.util.WindowsTalkingClock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,8 @@ public class ScriptRunner {
         ProcessBuilder builder = new ProcessBuilder();
         if (isWindows) {
             //builder.command("cmd.exe", "/c", "dir");
-            return Arrays.asList("sorry windows script was not in scope.");
+            //return Arrays.asList("sorry windows script was not in scope.");
+            return WindowsTalkingClock.getTime(command);
         } else {
             builder.command(command);
         }
