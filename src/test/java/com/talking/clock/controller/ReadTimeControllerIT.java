@@ -1,6 +1,6 @@
 package com.talking.clock.controller;
 
-import com.talking.clock.service.ScriptRunner;
+import com.talking.clock.shell.ScriptRunner;
 import com.talking.clock.service.TimeConversionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
